@@ -11,7 +11,8 @@ class Sql extends PDO {
 
     public function __construct()
     {
-        $this->conn = new PDO("mysql:host=localhost;dbname=aapvr","root","aapvr");
+        $this->conn = new PDO("mysql:host=localhost;dbname=aapvr","root","aapvr",array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''));
+        //$this->conn->query("SET NAMES utf8;");
     }
 
     public function setParams($statement, $parameters = array()){

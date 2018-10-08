@@ -58,6 +58,16 @@ class Usuario{
             $this->setSenha($row['SENHA']);
         }
     }
+    public static function getList(){
+        $sql = new Sql();
+        return $sql->select("select * from usuarios order by USUARIO");
+
+    }
+
+    public static function search($usuario){
+        $sql = new Sql();
+        return
+    }
 
     function __toString()
     {
