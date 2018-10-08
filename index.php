@@ -8,7 +8,6 @@
 
 require_once("config.php");
 
-$sql = new Sql("mysql:host=localhost;dbname=aapvr","root","aapvr");
-$usuarios = $sql->select("select * from usuarios where codigo > 1850");
-
-echo json_encode($usuarios);
+$thiago = new Usuario();
+$thiago->loadById(1644);
+echo $thiago;
