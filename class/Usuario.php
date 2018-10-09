@@ -50,7 +50,7 @@ class Usuario{
             ":id"=>$id
         ));
         if (count($results) > 0){
-            $this->setData($results[0]);
+            $this->setDados($results[0]);
         }
     }
     public static function getList(){
@@ -73,14 +73,14 @@ class Usuario{
             ":senha"=>$senha
         ));
         if (count($results) > 0){
-            $this->setData($results[0]);
+            $this->setDados($results[0]);
 
         } else {
             throw new Exception("Login e/ou senha inválidos");
         }
     }
 
-    public function setData($data){
+    public function setDados($data){
         $this->setCodigo($data['CODIGO']);
         $this->setMatricula($data['MATRICULA']);
         $this->setUsuario($data['USUARIO']);
@@ -96,7 +96,7 @@ class Usuario{
         ));
 
         if(count($results) > 0){
-            $this->setData($results[0]);
+            $this->setDados($results[0]);
         }
     }
 
@@ -109,6 +109,19 @@ class Usuario{
             ":usuario"=>$this->getUsuario(),
             ":matricula"=>$this->getMatricula()
         ));
+    }
+
+    public function delete(){
+
+        $sql = new Sql();
+        $sql->query("delete from usuarios where codigo = :codigo",array(
+            ":codigo"=>$this->getCodigo()
+        ));
+
+        $this->setCodigo(0);
+        $this->setUsuario("");
+        $this->setMatricula("");
+        $this->setSenha("");
     }
 
     function __toString()
