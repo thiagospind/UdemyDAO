@@ -66,7 +66,27 @@ class Usuario{
 
     public static function search($usuario){
         $sql = new Sql();
-        return
+        return $sql->select("select * from usuarios where usuario like :search ",array(
+            ':search'=>"%".$usuario."%"
+        ));
+    }
+
+    public function login($usuario,$senha){
+        $sql = new Sql();
+        $results = $sql->select("select * from usuarios where usuario = :usuario and senha = :senha",array(
+            ":usuario"=>$usuario,
+            ":senha"=>$senha
+        ));
+        if (count($results) > 0){
+            $row = $results[0];
+
+            $this->setCodigo($row['CODIGO']);
+            $this->setMatricula($row['MATRICULA']);
+            $this->setUsuario($row['USUARIO']);
+            $this->setSenha($row['SENHA']);
+        } else {
+            throw new Exception("Login e/ou senha inválidos");
+        }
     }
 
     function __toString()

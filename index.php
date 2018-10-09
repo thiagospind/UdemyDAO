@@ -14,6 +14,15 @@ require_once("config.php");
 //echo $thiago;
 
 //Carrega uma lista de usuários
+//$lista = Usuario::getList();
+//echo json_encode($lista);
 
-$lista = Usuario::getList();
-echo json_encode($lista);
+//Carrega lista de usuarios pelo usuario
+//$search = Usuario::search("andr");
+//echo json_encode($search);
+
+//Carrega um usuario usando login e a senha
+$usuario = new Usuario();
+$usuario->login("00817","123mudar");
+
+echo $usuario;
