@@ -50,12 +50,7 @@ class Usuario{
             ":id"=>$id
         ));
         if (count($results) > 0){
-            $row = $results[0];
-
-            $this->setCodigo($row['CODIGO']);
-            $this->setMatricula($row['MATRICULA']);
-            $this->setUsuario($row['USUARIO']);
-            $this->setSenha($row['SENHA']);
+            $this->setData($results[0]);
         }
     }
     public static function getList(){
@@ -78,14 +73,30 @@ class Usuario{
             ":senha"=>$senha
         ));
         if (count($results) > 0){
-            $row = $results[0];
+            $this->setData($results[0]);
 
-            $this->setCodigo($row['CODIGO']);
-            $this->setMatricula($row['MATRICULA']);
-            $this->setUsuario($row['USUARIO']);
-            $this->setSenha($row['SENHA']);
         } else {
             throw new Exception("Login e/ou senha inválidos");
+        }
+    }
+
+    public function setData($data){
+        $this->setCodigo($data['CODIGO']);
+        $this->setMatricula($data['MATRICULA']);
+        $this->setUsuario($data['USUARIO']);
+        $this->setSenha($data['SENHA']);
+    }
+
+    public function insert(){
+        $sql = new Sql();
+        $results = $sql->select("call sp_usuarios_insert(:matricula, :usuario, :senha)", array(
+            ":matricula"=>$this->getMatricula(),
+            ":usuario"=>$this->getUsuario(),
+            ":senha"=>$this->getSenha()
+        ));
+
+        if(count($results) > 0){
+            $this->setData($results[0]);
         }
     }
 
@@ -98,6 +109,4 @@ class Usuario{
             "senha"=>$this->getSenha()
         ));
     }
-
-
 }
