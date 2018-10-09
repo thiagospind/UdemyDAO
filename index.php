@@ -25,12 +25,20 @@ require_once("config.php");
 //$usuario = new Usuario();
 //$usuario->login("00817","123mudar");
 
-$aluno = new Usuario();
+//Insere Usuario
+//$aluno = new Usuario();
 
-$aluno->setMatricula("00660");
-$aluno->setUsuario("660");
-$aluno->setSenha("123mudar");
+//$aluno->setMatricula("00660");
+//$aluno->setUsuario("660");
+//$aluno->setSenha("123mudar");
 
-$aluno->insert();
+//$aluno->insert();
 
-echo $aluno;
+//Atualiza Usuário
+
+$usuario = new Usuario();
+$usuario->loadById(1857);
+
+$usuario->update("123","00660");
+
+echo $usuario;

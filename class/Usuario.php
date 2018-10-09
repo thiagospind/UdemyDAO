@@ -100,6 +100,17 @@ class Usuario{
         }
     }
 
+    public function update($usuario, $matricula){
+        $this->setMatricula($matricula);
+        $this->setUsuario($usuario);
+
+        $sql = new Sql();
+        $sql->query("update usuarios set usuario = :usuario where matricula = :matricula",array(
+            ":usuario"=>$this->getUsuario(),
+            ":matricula"=>$this->getMatricula()
+        ));
+    }
+
     function __toString()
     {
         return json_encode(array(
